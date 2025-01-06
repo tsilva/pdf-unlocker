@@ -1,7 +1,7 @@
-# PDF Unlocker
+# pdf-unlocker
 
 <p align="center">
-  <img src="logo.jpg" alt="PDF Unlocker Logo" width="200"/>
+  <img src="logo.jpg" alt="PDF Unlocker Logo" width="400"/>
 </p>
 
 A command-line tool to batch unlock password-protected PDFs by scanning directories, prompting for passwords, and creating unlocked copies while preserving originals.
@@ -43,3 +43,7 @@ $ python main.py ~/Documents/protected-pdfs
 Enter password: ********
 2023-08-15 10:30:20 - INFO - Successfully unlocked: document.unlocked.pdf
 ```
+
+## License
+
+This project was developed in collaboration with the `claude-3.5-sonnet` and is made available under the [MIT License](LICENSE).
