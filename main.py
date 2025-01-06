@@ -2,8 +2,9 @@ import os
 import argparse
 import logging
 from getpass import getpass
-from PyPDF2 import PdfReader, PdfWriter
+import pikepdf
 from contextlib import contextmanager
+from tqdm import tqdm
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,59 +13,67 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-@contextmanager
-def temp_file(path):
-    try:
-        yield path
-    finally:
-        if os.path.exists(path):
-            os.remove(path)
+def remove_if_exists(path):
+    if os.path.exists(path):
+        os.remove(path)
+
+def try_unlock_with_password(input_path, temp_path, password):
+    pdf = pikepdf.open(input_path, password=password)
+    pdf.save(temp_path)
+    pikepdf.open(temp_path)  # Verify unlock worked
+    return True
+
+def process_single_attempt(input_path, temp_path, output_path):
+    password = getpass("Enter password: ")
+    if not try_unlock_with_password(input_path, temp_path, password):
+        return False
+    
+    os.rename(temp_path, output_path)
+    logger.info(f"Successfully unlocked: {os.path.basename(output_path)}")
+    return True
 
 def unlock_pdf(input_path, output_path):
-    reader = PdfReader(input_path)
-    if not reader.is_encrypted:
-        logger.info("File is not encrypted")
-        return True
+    # Try without password first
+    try:
+        pikepdf.open(input_path)
+        return False
+    except pikepdf.PasswordError:
+        pass
 
     temp_path = output_path + '.tmp'
+    logger.info(f"Processing encrypted file: {os.path.basename(input_path)}")
+
     while True:
         try:
-            with temp_file(temp_path):
-                reader.decrypt(getpass("Enter password: "))
-                
-                writer = PdfWriter()
-                writer.append_pages_from_reader(reader)
-                
-                with open(temp_path, "wb") as f:
-                    writer.write(f)
-                
-                if PdfReader(temp_path).is_encrypted:
-                    raise ValueError("Verification failed - password might be incorrect")
-                
-                os.rename(temp_path, output_path)
+            if process_single_attempt(input_path, temp_path, output_path):
                 return True
-                
         except Exception as e:
             logger.error(f"Failed to unlock: {e}")
+            remove_if_exists(temp_path)
+            
             if input("Would you like to try again? [Y/n]: ").lower() in ['n', 'no']:
                 logger.info("Skipping file at user request")
                 return False
 
+def get_pdf_files(directory):
+    return [f for f in os.listdir(directory) if f.endswith(".pdf")]
+
+def process_pdf(input_dir, pdf_name, pbar):
+    input_path = os.path.join(input_dir, pdf_name)
+    output_path = os.path.join(input_dir, f"{os.path.splitext(pdf_name)[0]}.unlocked.pdf")
+    pbar.set_postfix_str(pdf_name)
+
+    if os.path.exists(output_path):
+        logger.info(f"Skipping {pdf_name}: unlocked version already exists")
+        return
+
+    unlock_pdf(input_path, output_path)
+
 def batch_remove_password(input_dir):
-    for pdf in (f for f in os.listdir(input_dir) if f.endswith(".pdf")):
-        input_path = os.path.join(input_dir, pdf)
-        output_path = os.path.join(input_dir, f"{os.path.splitext(pdf)[0]}.unlocked.pdf")
-
-        if os.path.exists(output_path):
-            logger.info(f"Skipping {pdf}: unlocked version already exists")
-            continue
-
-        logger.info(f"Processing: {pdf}")
-        try:
-            if unlock_pdf(input_path, output_path):
-                logger.info(f"Successfully unlocked: {output_path}")
-        except Exception as e:
-            logger.error(f"Failed to process {pdf}: {e}")
+    pdf_files = get_pdf_files(input_dir)
+    with tqdm(pdf_files, desc="Processing PDFs", unit="file") as pbar:
+        for pdf in pbar:
+            process_pdf(input_dir, pdf, pbar)
 
 def main():
     parser = argparse.ArgumentParser(description='Batch remove passwords from PDF files')

@@ -4,7 +4,7 @@
   <img src="logo.jpg" alt="PDF Unlocker Logo" width="400"/>
 </p>
 
-A command-line tool to batch unlock password-protected PDFs by scanning directories, prompting for passwords, and creating unlocked copies while preserving originals.
+A Python command-line tool to batch unlock password-protected PDFs by scanning directories, prompting for passwords, and creating unlocked copies while preserving originals.
 
 ## Installation
 
