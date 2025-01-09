@@ -4,14 +4,14 @@
   <img src="logo.jpg" alt="PDF Unlocker Logo" width="400"/>
 </p>
 
-> 🚀 A lightning-fast Python tool that batch unlocks password-protected PDFs while keeping your originals safe.
+> A handy Python tool to batch unlock password-protected PDFs while keeping your originals safe.
 
 ## ✨ Features
 
-- 🔍 Smart detection of encrypted PDFs
+- 🔍 Detects encrypted PDFs
 - 🔐 Interactive password prompting
-- ⚡ Parallel processing with progress tracking
-- ✅ Built-in unlock verification
+- ⚡ Progress tracking with a progress bar
+- ✅ Unlock verification
 - 🛡️ Original files remain untouched
 - 📁 Clean file organization with `.unlocked.pdf` suffix
 
