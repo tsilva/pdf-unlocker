@@ -1,12 +1,21 @@
-# pdf-unlocker
+# 🔓 PDF Unlocker
 
 <p align="center">
   <img src="logo.jpg" alt="PDF Unlocker Logo" width="400"/>
 </p>
 
-A Python command-line tool to batch unlock password-protected PDFs by scanning directories, prompting for passwords, and creating unlocked copies while preserving originals.
+> 🚀 A lightning-fast Python tool that batch unlocks password-protected PDFs while keeping your originals safe.
 
-## Installation
+## ✨ Features
+
+- 🔍 Smart detection of encrypted PDFs
+- 🔐 Interactive password prompting
+- ⚡ Parallel processing with progress tracking
+- ✅ Built-in unlock verification
+- 🛡️ Original files remain untouched
+- 📁 Clean file organization with `.unlocked.pdf` suffix
+
+## 🛠️ Installation
 
 1. Clone this repository:
 ```bash
@@ -20,22 +29,15 @@ conda env create -f environment.yml
 conda activate pdf-unlocker
 ```
 
-## Usage
+## 📝 Usage
 
-Run the script by providing the directory containing your password-protected PDFs:
+Just point it to your PDF directory:
 
 ```bash
 python main.py /path/to/pdf/folder
 ```
 
-The script will:
-- Process all PDF files in the specified directory
-- Prompt for passwords when needed
-- Create unlocked versions with `.unlocked.pdf` suffix
-- Skip already processed files
-- Verify successful unlocking
-
-## Example
+## 🎯 Example
 
 ```bash
 $ python main.py ~/Documents/protected-pdfs
@@ -44,6 +46,10 @@ Enter password: ********
 2023-08-15 10:30:20 - INFO - Successfully unlocked: document.unlocked.pdf
 ```
 
-## License
+## 🤝 Contributing
 
-This project was developed in collaboration with the `claude-3.5-sonnet` and is made available under the [MIT License](LICENSE).
+Found a bug or want to contribute? PRs are welcome!
+
+## 📄 License
+
+This project was developed in collaboration with the `claude-3.5-sonnet` AI assistant and is made available under the [MIT License](LICENSE).
