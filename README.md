@@ -46,10 +46,6 @@ Enter password: ********
 2023-08-15 10:30:20 - INFO - Successfully unlocked: document.unlocked.pdf
 ```
 
-## 🤝 Contributing
-
-Found a bug or want to contribute? PRs are welcome!
-
 ## 📄 License
 
 This project was developed in collaboration with the `claude-3.5-sonnet` AI assistant and is made available under the [MIT License](LICENSE).
