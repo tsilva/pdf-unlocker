@@ -1,4 +1,4 @@
-# 🔓 PDF Unlocker
+# 🔓 pdf-unlocker
 
 <p align="center">
   <img src="logo.jpg" alt="PDF Unlocker Logo" width="400"/>
