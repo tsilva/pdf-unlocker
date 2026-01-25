@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="logo.jpg" alt="pdf-unlocker" width="200"/>
 
-  # pdf-unlocker
+# pdf-unlocker
 
-  [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-  [![Python](https://img.shields.io/badge/Python-3.7+-3776ab.svg)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.9+-3776ab.svg)](https://python.org)
+[![uv](https://img.shields.io/badge/uv-package-blueviolet)](https://docs.astral.sh/uv/)
 
-  **🔓 Batch unlock password-protected PDFs while keeping your originals safe**
+**Batch unlock password-protected PDFs while keeping your originals safe**
 
 </div>
 
@@ -26,32 +26,41 @@ pdf-unlocker is a Python CLI tool that processes directories of password-protect
 ## Quick Start
 
 ```bash
-# Clone and install
-git clone https://github.com/tsilva/pdf-unlocker.git
-cd pdf-unlocker
-pip install -r requirements.txt
+# Install with uv
+uv tool install git+https://github.com/tsilva/pdf-unlocker.git
 
 # Run
-python main.py /path/to/pdf/folder
+pdf-unlocker /path/to/pdf/folder
 ```
 
 ## Installation
+
+### Using uv (recommended)
+
+```bash
+# Install as a tool (available globally)
+uv tool install git+https://github.com/tsilva/pdf-unlocker.git
+
+# Or install from local clone
+git clone https://github.com/tsilva/pdf-unlocker.git
+cd pdf-unlocker
+uv tool install .
+```
 
 ### Using pip
 
 ```bash
 git clone https://github.com/tsilva/pdf-unlocker.git
 cd pdf-unlocker
-pip install -r requirements.txt
+pip install .
 ```
 
-### Using conda
+### For development
 
 ```bash
 git clone https://github.com/tsilva/pdf-unlocker.git
 cd pdf-unlocker
-conda env create -f environment.yml
-conda activate pdf-unlocker
+uv pip install -e .
 ```
 
 ## Usage
@@ -59,13 +68,13 @@ conda activate pdf-unlocker
 Point the tool at a directory containing password-protected PDFs:
 
 ```bash
-python main.py /path/to/pdf/folder
+pdf-unlocker /path/to/pdf/folder
 ```
 
 ### Example Session
 
 ```
-$ python main.py ~/Documents/protected-pdfs
+$ pdf-unlocker ~/Documents/protected-pdfs
 Processing PDFs: 100%|████████████████| 5/5 [00:15<00:00]
 2025-01-15 10:30:15 - INFO - Processing encrypted file: document.pdf
 Enter password: ********

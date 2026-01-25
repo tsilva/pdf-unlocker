@@ -1,0 +1,42 @@
+[project]
+name = "pdf-unlocker"
+version = "0.1.0"
+description = "Batch unlock password-protected PDF files"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "tsilva" }
+]
+keywords = ["pdf", "unlock", "password", "batch"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "pikepdf>=8.0.0",
+    "tqdm>=4.0.0",
+]
+
+[project.scripts]
+pdf-unlocker = "pdf_unlocker.cli:main"
+
+[project.urls]
+Repository = "https://github.com/tsilva/pdf-unlocker"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pdf_unlocker"]

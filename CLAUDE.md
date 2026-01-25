@@ -4,12 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-pdf-unlocker is a Python tool for batch unlocking password-protected PDFs. The tool processes a directory of PDFs, detects encrypted files, prompts for passwords interactively, and creates unlocked versions with a `.unlocked.pdf` suffix while preserving the original files.
+pdf-unlocker is a Python CLI tool for batch unlocking password-protected PDFs. The tool processes a directory of PDFs, detects encrypted files, prompts for passwords interactively, and creates unlocked versions with a `.unlocked.pdf` suffix while preserving the original files.
 
 ## Core Architecture
 
-This is a single-file Python application (`main.py`) with a straightforward workflow:
+This is a Python package with a CLI entry point:
 
+- `pdf_unlocker/cli.py` - Main CLI logic and PDF processing workflow
+- `pdf_unlocker/__init__.py` - Package metadata and version
+
+Workflow:
 1. **PDF Discovery**: Scans directory for `.pdf` files
 2. **Encryption Detection**: Attempts to open each PDF without a password using `pikepdf`
 3. **Interactive Unlocking**: If encrypted, prompts user for password with retry logic
@@ -21,21 +25,26 @@ The application uses `pikepdf` for PDF manipulation and `tqdm` for progress trac
 
 ### Setup
 ```bash
-# Using pip
-pip install -r requirements.txt
+# Install with uv (recommended)
+uv pip install -e .
 
-# Using conda
-conda env create -f environment.yml
-conda activate pdf-unlocker
+# Or install globally with uv tool
+uv tool install .
+
+# Or using pip
+pip install -e .
 ```
 
 ### Running the Tool
 ```bash
-# Basic usage
-python main.py /path/to/pdf/folder
+# After installation
+pdf-unlocker /path/to/pdf/folder
+
+# Or run directly with uv
+uv run pdf-unlocker /path/to/pdf/folder
 
 # Example
-python main.py ~/Documents/protected-pdfs
+pdf-unlocker ~/Documents/protected-pdfs
 ```
 
 ### Testing Manually
@@ -55,10 +64,6 @@ Since this tool requires interactive password input and operates on actual PDF f
 - **Idempotency**: Skips PDFs that already have `.unlocked.pdf` versions
 - **Verification**: After unlocking, attempts to open the output file to verify success
 - **Logging**: Structured logging with timestamps for debugging and monitoring
-
-## Future Roadmap
-
-See TODO.md - the project is planned to be converted into a command-line tool installable via pipx.
 
 ## Project Maintenance
 
