@@ -1,29 +1,27 @@
 <div align="center">
+  <img src="logo.png" alt="pdf-unlocker" width="512"/>
 
-# pdf-unlocker
+  # pdf-unlocker
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.9+-3776ab.svg)](https://python.org)
-[![uv](https://img.shields.io/badge/uv-package-blueviolet)](https://docs.astral.sh/uv/)
+  [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+  [![Python](https://img.shields.io/badge/Python-3.9+-3776ab.svg)](https://python.org)
+  [![uv](https://img.shields.io/badge/uv-package-blueviolet)](https://docs.astral.sh/uv/)
 
-**Batch unlock password-protected PDFs while keeping your originals safe**
+  **🔓 Batch unlock password-protected PDFs while keeping your originals safe**
 
 </div>
 
-## Overview
+## ✨ Features
 
-pdf-unlocker is a Python CLI tool that processes directories of password-protected PDFs, prompting for passwords interactively and creating unlocked versions with a `.unlocked.pdf` suffix. Your original files remain untouched.
+- **Batch processing** — Process entire directories of PDFs at once
+- **Smart detection** — Automatically identifies encrypted PDFs, skips unprotected ones
+- **Safe output** — Creates `.unlocked.pdf` files, preserving originals
+- **Idempotent** — Skips files that already have unlocked versions
+- **Interactive retry** — Wrong password? Retry or skip without losing progress
+- **Progress tracking** — Visual progress bar with tqdm
+- **Secure input** — Passwords are hidden during entry
 
-## Features
-
-- **Batch processing** - Process entire directories of PDFs at once
-- **Smart detection** - Automatically identifies encrypted PDFs, skips unprotected ones
-- **Safe output** - Creates `.unlocked.pdf` files, preserving originals
-- **Idempotent** - Skips files that already have unlocked versions
-- **Interactive retry** - Wrong password? Retry or skip without losing progress
-- **Progress tracking** - Visual progress bar with tqdm
-
-## Quick Start
+## 🚀 Quick Start
 
 ```bash
 # Install with uv
@@ -33,7 +31,7 @@ uv tool install git+https://github.com/tsilva/pdf-unlocker.git
 pdf-unlocker /path/to/pdf/folder
 ```
 
-## Installation
+## 📦 Installation
 
 ### Using uv (recommended)
 
@@ -63,7 +61,7 @@ cd pdf-unlocker
 uv pip install -e .
 ```
 
-## Usage
+## 📖 Usage
 
 Point the tool at a directory containing password-protected PDFs:
 
@@ -83,11 +81,27 @@ Enter password: ********
 
 ### Output
 
-- Unlocked files are saved as `<original-name>.unlocked.pdf` in the same directory
+| Input | Output |
+|-------|--------|
+| `document.pdf` | `document.unlocked.pdf` |
+| `report.pdf` | `report.unlocked.pdf` |
+
+- Unlocked files are saved in the same directory as originals
 - Original files are never modified
 - Already-unlocked files are skipped automatically
 
-## How It Works
+## ⚙️ How It Works
+
+```mermaid
+flowchart LR
+    A[Scan directory] --> B{Encrypted?}
+    B -->|No| C[Skip]
+    B -->|Yes| D[Prompt password]
+    D --> E{Correct?}
+    E -->|No| F[Retry/Skip]
+    E -->|Yes| G[Create .unlocked.pdf]
+    F --> D
+```
 
 1. Scans the target directory for `.pdf` files
 2. Attempts to open each PDF without a password
@@ -95,17 +109,19 @@ Enter password: ********
 4. Creates unlocked version with `.unlocked.pdf` suffix
 5. Verifies the unlocked file can be opened successfully
 
-## Dependencies
+## 📋 Dependencies
 
-- [pikepdf](https://pikepdf.readthedocs.io/) - PDF manipulation
-- [tqdm](https://tqdm.github.io/) - Progress bars
+| Package | Purpose |
+|---------|---------|
+| [pikepdf](https://pikepdf.readthedocs.io/) | PDF manipulation |
+| [tqdm](https://tqdm.github.io/) | Progress bars |
 
-## License
+## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 <div align="center">
-  <sub>Built with the help of Claude AI</sub>
+  <sub>Built with ❤️ and the help of Claude AI</sub>
 </div>
