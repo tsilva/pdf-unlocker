@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-pdf-unlocker is a Python CLI tool for batch unlocking password-protected PDFs. The tool processes a directory of PDFs, detects encrypted files, prompts for passwords interactively, and creates unlocked versions with a `.unlocked.pdf` suffix while preserving the original files.
+pdf-password-remover is a Python CLI tool for batch removing passwords from protected PDFs. The tool processes a directory of PDFs, detects encrypted files, prompts for passwords interactively, and creates unlocked versions with a `.unlocked.pdf` suffix while preserving the original files.
 
 ## Core Architecture
 
 This is a Python package with a CLI entry point:
 
-- `pdf_unlocker/cli.py` - Main CLI logic and PDF processing workflow
-- `pdf_unlocker/__init__.py` - Package metadata and version
+- `pdf_password_remover/cli.py` - Main CLI logic and PDF processing workflow
+- `pdf_password_remover/__init__.py` - Package metadata and version
 
 Workflow:
 1. **PDF Discovery**: Scans directory for `.pdf` files
@@ -38,13 +38,13 @@ pip install -e .
 ### Running the Tool
 ```bash
 # After installation
-pdf-unlocker /path/to/pdf/folder
+pdf-password-remover /path/to/pdf/folder
 
 # Or run directly with uv
-uv run pdf-unlocker /path/to/pdf/folder
+uv run pdf-password-remover /path/to/pdf/folder
 
 # Example
-pdf-unlocker ~/Documents/protected-pdfs
+pdf-password-remover ~/Documents/protected-pdfs
 ```
 
 ### Testing Manually

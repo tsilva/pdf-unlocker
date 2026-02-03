@@ -1,13 +1,13 @@
 <div align="center">
-  <img src="logo.png" alt="pdf-unlocker" width="512"/>
+  <img src="logo.png" alt="pdf-password-remover" width="512"/>
 
-  # pdf-unlocker
+  # pdf-password-remover
 
   [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
   [![Python](https://img.shields.io/badge/Python-3.9+-3776ab.svg)](https://python.org)
   [![uv](https://img.shields.io/badge/uv-package-blueviolet)](https://docs.astral.sh/uv/)
 
-  **🔓 Batch unlock password-protected PDFs while keeping your originals safe**
+  **🔓 Batch remove passwords from protected PDFs while keeping your originals safe**
 
 </div>
 
@@ -25,10 +25,10 @@
 
 ```bash
 # Install with uv
-uv tool install git+https://github.com/tsilva/pdf-unlocker.git
+uv tool install git+https://github.com/tsilva/pdf-password-remover.git
 
 # Run
-pdf-unlocker /path/to/pdf/folder
+pdf-password-remover /path/to/pdf/folder
 ```
 
 ## 📦 Installation
@@ -37,27 +37,27 @@ pdf-unlocker /path/to/pdf/folder
 
 ```bash
 # Install as a tool (available globally)
-uv tool install git+https://github.com/tsilva/pdf-unlocker.git
+uv tool install git+https://github.com/tsilva/pdf-password-remover.git
 
 # Or install from local clone
-git clone https://github.com/tsilva/pdf-unlocker.git
-cd pdf-unlocker
+git clone https://github.com/tsilva/pdf-password-remover.git
+cd pdf-password-remover
 uv tool install .
 ```
 
 ### Using pip
 
 ```bash
-git clone https://github.com/tsilva/pdf-unlocker.git
-cd pdf-unlocker
+git clone https://github.com/tsilva/pdf-password-remover.git
+cd pdf-password-remover
 pip install .
 ```
 
 ### For development
 
 ```bash
-git clone https://github.com/tsilva/pdf-unlocker.git
-cd pdf-unlocker
+git clone https://github.com/tsilva/pdf-password-remover.git
+cd pdf-password-remover
 uv pip install -e .
 ```
 
@@ -66,13 +66,13 @@ uv pip install -e .
 Point the tool at a directory containing password-protected PDFs:
 
 ```bash
-pdf-unlocker /path/to/pdf/folder
+pdf-password-remover /path/to/pdf/folder
 ```
 
 ### Example Session
 
 ```
-$ pdf-unlocker ~/Documents/protected-pdfs
+$ pdf-password-remover ~/Documents/protected-pdfs
 Processing PDFs: 100%|████████████████| 5/5 [00:15<00:00]
 2025-01-15 10:30:15 - INFO - Processing encrypted file: document.pdf
 Enter password: ********
